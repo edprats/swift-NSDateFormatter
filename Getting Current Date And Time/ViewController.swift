@@ -10,16 +10,33 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var dateLabel: UILabel!
+
+    var currentNSDate = NSDate()
+    var dateFormatter = NSDateFormatter()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        dateLabel.text = formatDate()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func refreshDateButtonPressed(sender: UIButton) {
+        dateLabel.text = formatDate()
     }
+    
+    func formatDate() -> String {
+        currentNSDate = NSDate()
+        dateLabel.text = String(currentNSDate)
+        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .MediumStyle
+        
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
+        let formattedDate = dateFormatter.stringFromDate(currentNSDate)
+        
+        return formattedDate
 
-
+    }
+    
 }
 
